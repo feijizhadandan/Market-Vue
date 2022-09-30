@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="#">VueWeb</a>
+      <router-link class="navbar-brand" :to="{ name: 'home' }"> VueWeb </router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -16,21 +16,24 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">首页</a>
+            <router-link class="nav-link" :to="{ name: 'home' }">首页</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">功能</a>
+            <router-link class="nav-link" :to="{ name: 'personal' }">个人中心</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">好友</a>
+            <router-link class="nav-link" :to="{ name: 'function' }">功能</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'friend' }">好友</router-link>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">登录</a>
+            <router-link class="nav-link" :to="{ name: 'login' }">登录</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">注册</a>
+            <router-link class="nav-link" :to="{ name: 'register' }">注册</router-link>
           </li>
         </ul>
       </div>
@@ -38,12 +41,7 @@
   </nav>
 </template>
 
-<script>
-// 将组件export出去
-export default {
-  name: 'NavBar',
-}
-</script>
+<script setup></script>
 
 <!-- scoped: 当前组件所写的css选择器不会影响到其他组件 -->
 <style scoped></style>
