@@ -9,8 +9,9 @@
           href="#list-home"
           role="tab"
           aria-controls="list-home"
-          >个人主页</a
         >
+          个人主页
+        </a>
         <a
           class="list-group-item list-group-item-action"
           id="list-profile-list"
@@ -18,8 +19,9 @@
           href="#list-profile"
           role="tab"
           aria-controls="list-profile"
-          >编辑信息</a
         >
+          编辑信息
+        </a>
         <a
           class="list-group-item list-group-item-action"
           id="list-messages-list"
@@ -27,8 +29,9 @@
           href="#list-messages"
           role="tab"
           aria-controls="list-messages"
-          >账号绑定</a
         >
+          账号绑定
+        </a>
         <a
           class="list-group-item list-group-item-action"
           id="list-settings-list"
@@ -36,44 +39,23 @@
           href="#list-settings"
           role="tab"
           aria-controls="list-settings"
-          >设置</a
         >
+          设置
+        </a>
       </div>
     </div>
     <div class="col-10">
       <div class="tab-content" id="nav-tabContent">
-        <div
-          class="tab-pane fade show active"
-          id="list-home"
-          role="tabpanel"
-          aria-labelledby="list-home-list"
-        >
+        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
           <HomePage></HomePage>
         </div>
-        <div
-          class="tab-pane fade"
-          id="list-profile"
-          role="tabpanel"
-          aria-labelledby="list-profile-list"
-        >
+        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
           <UserInfo></UserInfo>
         </div>
-        <div
-          class="tab-pane fade"
-          id="list-messages"
-          role="tabpanel"
-          aria-labelledby="list-messages-list"
-        >
+        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
           <AccountBind></AccountBind>
         </div>
-        <div
-          class="tab-pane fade"
-          id="list-settings"
-          role="tabpanel"
-          aria-labelledby="list-settings-list"
-        >
-          ...
-        </div>
+        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
       </div>
     </div>
   </div>

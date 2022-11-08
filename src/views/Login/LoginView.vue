@@ -2,21 +2,20 @@
   <ContentCard>
     <div class="row">
       <div class="col-md-6" id="login-card">
-        <h2 id="title">Please Login, My Boy</h2>
-        <form>
-          <div class="mb-3">
-            <label for="username" class="form-label">账号</label>
-            <input type="text" class="form-control" id="username" placeholder="请输入用户账号" />
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">密码</label>
-            <input type="password" class="form-control" id="password" placeholder="请输入用户密码" />
-          </div>
-          <div id="operation">
-            <button type="submit" class="btn btn-primary" style="margin: 0 auto">Submit</button>
-            <router-link class="btn-link" :to="{ name: 'register' }">注册</router-link>
-          </div>
-        </form>
+        <h2 id="title">{{ tips }}</h2>
+        <div class="mb-3">
+          <label for="username" class="form-label">账号</label>
+          <input type="text" class="form-control" id="username" placeholder="请输入用户账号" v-model="username" />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">密码</label>
+          <input type="password" class="form-control" id="password" placeholder="请输入用户密码" v-model="password" />
+        </div>
+        <div id="operation">
+          <button type="submit" class="btn btn-primary" style="margin: 0 auto" @click="loginClick">登录</button>
+          <!-- 跳转注册 -->
+          <router-link class="btn-link" :to="{ name: 'register' }">注册</router-link>
+        </div>
       </div>
     </div>
   </ContentCard>
@@ -24,8 +23,38 @@
 
 <script setup>
 import ContentCard from '@/components/ContentCard.vue';
+import router from '@/router';
+import store from '@/store';
+import { ref, inject } from 'vue';
 
-// 跳转注册
+// 注入全局 axios
+const axios = inject('axios');
+
+// 登录提示信息
+const tips = ref('Please Login, My Boy');
+
+// 用户输入的账号密码
+const username = ref('');
+const password = ref('');
+
+function loginClick() {
+  axios
+    .post('/api/login', {
+      userName: username.value,
+      password: password.value,
+    })
+    .then(res => {
+      // 登陆失败
+      if (res.data.code === 401) {
+        tips.value = res.data.msg;
+      } else {
+        store.commit('setToken', res.data.data.token);
+        store.commit('changeLoginStatus', true);
+        // 登录成功后，跳转至主页面
+        router.push('/');
+      }
+    });
+}
 </script>
 
 <style scoped>

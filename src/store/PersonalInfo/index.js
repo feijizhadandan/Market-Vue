@@ -12,20 +12,37 @@ const personalInfo = {
             email: "215628266@qq.com",
             followerCount: 0,
             experienceValue: 0,
-        }
+        },
+        // Token
+        token: localStorage.getItem('token'),
+        // 登录状态（默认为已登录状态）
+        hasLogin: true
     },
+    // 类似计算属性，可以返回加工后的值
     getters: {
-        getUserName(state) {
-            return state.userDetails.userName
+        getLoginStatus(state) {
+            console.log(state.hasLogin)
+            return state.hasLogin;
         }
-    },
+    },  
+    // 更改状态只能通过 mutations 进行更改
     mutations: {
         changePhotoUrl(state, para) {
             state.photoUrl = para
-        }
+        },
+        // 更新 token 值
+        setToken(state, newToken) {
+            state.token = newToken
+            // 将 token 存到本地缓存中
+            localStorage.token = newToken;
+        },
+        // 修改登录状态
+        changeLoginStatus(state, status) {
+        state.hasLogin = status
+      }
     },
+    // 可以用于发送异步请求
     actions: {
-    
     },
 }
 
