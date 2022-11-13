@@ -44,14 +44,17 @@ function loginClick() {
       password: password.value,
     })
     .then(res => {
-      // 登陆失败
-      if (res.data.code === 401) {
-        tips.value = res.data.msg;
-      } else {
+      // 登陆成功
+      if (res.data.code === 200) {
         store.commit('setToken', res.data.data.token);
         store.commit('changeLoginStatus', true);
         // 登录成功后，跳转至主页面
         router.push('/');
+      }
+      // 登录失败
+      else {
+        console.log(res.data);
+        tips.value = res.data.msg;
       }
     });
 }

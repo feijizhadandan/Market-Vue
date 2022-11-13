@@ -64,7 +64,8 @@ router.beforeEach((to) => {
   // 因为在该页面刷新时，先执行的是 router 中的守卫函数，同时 store 中的 hasLogin 会变为默认值，如果是 false，就会导致尽管是已登录状态，也会跳转到 Login 页面
   // 因为 token 的验证是在根组件的 onMounted 函数中进行验证的。因此可以先默认登录了，在验证登录时如果发现没登录，再跳转到登录页面。
   if(to.meta.requireLogin && !store.state.personalInfo.hasLogin) {
-    return { name: 'login' }
+    alert("请先登录~")
+    return { name: 'login' }  
   }
 })
 
