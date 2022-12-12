@@ -26,6 +26,7 @@ import ContentCard from '@/components/ContentCard.vue';
 import router from '@/router';
 import store from '@/store';
 import { ref, inject } from 'vue';
+import { ElMessage } from 'element-plus';
 
 // 注入全局 axios
 const axios = inject('axios');
@@ -48,13 +49,19 @@ function loginClick() {
       if (res.data.code === 200) {
         store.commit('setToken', res.data.data.token);
         store.commit('changeLoginStatus', true);
+        ElMessage({
+          type: res.data.code === 200 ? 'success' : 'error',
+          message: `登录成功`,
+        });
         // 登录成功后，跳转至主页面
         router.push('/');
       }
       // 登录失败
       else {
-        console.log(res.data);
-        tips.value = res.data.msg;
+        ElMessage({
+          type: 'error',
+          message: `${res.data.msg}`,
+        });
       }
     });
 }

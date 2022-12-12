@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import PersonalView from '../views/PersonalCenter/PersonalView.vue'
-import FunctionView from '../views/Function/FunctionView.vue'
-import FriendListView from '../views/Friend/FriendListView.vue'
+import MarketView from '../views/Market/MarketView.vue'
+import CartView from '../views/Cart/CartView.vue'
+import ManagementView from '../views/Management/ManagementView.vue'
 import LoginView from '../views/Login/LoginView.vue'
 import RegisterView from '../views/Register/RegisterView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 import store from '@/store'
+import { ElMessage } from 'element-plus';
 
 
 
@@ -25,14 +27,25 @@ const routes = [
     }
   },
   {
-    path: '/function',
-    name: 'function',
-    component: FunctionView
+    path: '/market',
+    name: 'market',
+    component: MarketView,
   },
   {
-    path: '/friend',
-    name: 'friend',
-    component: FriendListView
+    path: '/cart',
+    name: 'cart',
+    component: CartView,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/management',
+    name: 'management',
+    component: ManagementView,
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/login',
@@ -64,7 +77,10 @@ router.beforeEach((to) => {
   // 因为在该页面刷新时，先执行的是 router 中的守卫函数，同时 store 中的 hasLogin 会变为默认值，如果是 false，就会导致尽管是已登录状态，也会跳转到 Login 页面
   // 因为 token 的验证是在根组件的 onMounted 函数中进行验证的。因此可以先默认登录了，在验证登录时如果发现没登录，再跳转到登录页面。
   if(to.meta.requireLogin && !store.state.personalInfo.hasLogin) {
-    alert("请先登录~")
+    ElMessage({
+      type: 'warning',
+      message: `登录后可查看该内容`,
+    });
     return { name: 'login' }  
   }
 })

@@ -18,14 +18,17 @@
           <li class="nav-item">
             <router-link class="nav-link" :to="{ name: 'home' }">首页</router-link>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <router-link class="nav-link" :to="{ name: 'personal' }">个人中心</router-link>
+          </li> -->
+          <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'market' }">商城</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'function' }">功能</router-link>
+            <router-link class="nav-link" :to="{ name: 'cart' }">购物车</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'friend' }">好友</router-link>
+            <router-link class="nav-link" :to="{ name: 'management' }">管理</router-link>
           </li>
         </ul>
         <ul class="navbar-nav" v-if="!store.state.personalInfo.hasLogin">
@@ -49,6 +52,7 @@
 <script setup>
 import store from '@/store';
 import axios from 'axios';
+import { ElMessage } from 'element-plus';
 
 // 注销账号
 function logout() {
@@ -67,9 +71,15 @@ function logout() {
       if (res.data.code === 200) {
         store.commit('changeLoginStatus', false);
         localStorage.removeItem('token');
-        alert(res.data.msg);
+        ElMessage({
+          type: res.data.code === 200 ? 'success' : 'error',
+          message: `${res.data.msg}`,
+        });
       } else {
-        alert('登录信息已过期');
+        ElMessage({
+          type: 'warning',
+          message: `登录信息已过期`,
+        });
       }
     });
 }

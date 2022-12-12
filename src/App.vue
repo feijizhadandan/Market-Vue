@@ -1,8 +1,12 @@
 <template>
-  <NavBar />
-
-  <!-- NavBar的路由展示区 -->
-  <router-view />
+  <div id="background">
+    <img id="img" :src="imgSrc" alt="..." />
+  </div>
+  <div id="content">
+    <NavBar />
+    <!-- NavBar的路由展示区 -->
+    <router-view />
+  </div>
 </template>
 
 <!-- 引入Bootstrap -->
@@ -10,10 +14,13 @@
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import NavBar from './components/NavBar.vue';
 import router from './router';
 import store from './store';
+
+// 背景图片url
+const imgSrc = ref('http://47.106.122.140:19000/store/productphoto_1670865562418_background.png');
 
 // 刷新后用于验证用户登录状态
 onMounted(() => {
@@ -45,4 +52,26 @@ onMounted(() => {
 });
 </script>
 
-<style></style>
+<style>
+#background {
+  /* 宽高100%是为了div铺满屏幕 */
+  width: 100%;
+  height: 100%;
+  /* 透明度 */
+  opacity: 0.2;
+  z-index: 2;
+  position: absolute;
+  /* 穿透鼠标事件 */
+  pointer-events: none;
+  /* 让背景元素不随滚轮滚动 */
+  position: fixed;
+}
+#img {
+  /* 宽高100%是为了图片铺满div */
+  width: 100%;
+  height: 100%;
+}
+#content {
+  z-index: 1;
+}
+</style>
