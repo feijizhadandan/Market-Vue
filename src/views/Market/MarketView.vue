@@ -22,17 +22,22 @@
           />
           <div class="card-body">
             <h5 class="card-title">{{ p.productName }}</h5>
-            <p class="card-text">商品价格： {{ p.productPrice }}</p>
-            <p class="card-text">商品描述： {{ p.productIntroduction }}</p>
-            <el-button
-              type="primary"
-              @click="
-                dialogVisible = true;
-                cartForm.productId = p.id;
-              "
-            >
-              添加至购物车
-            </el-button>
+            <span class="card-text">Price:</span>
+            <span style="float: right">{{ p.productPrice }}￥</span>
+            <br />
+            <div class="option-button">
+              <el-button type="primary" @click="getDetail(p)">查看详情</el-button>
+              <el-button
+                type="primary"
+                style="float: right"
+                @click="
+                  dialogVisible = true;
+                  cartForm.productId = p.id;
+                "
+              >
+                添加至购物车
+              </el-button>
+            </div>
           </div>
         </div>
       </div>
@@ -71,14 +76,33 @@
     </el-dialog>
 
     <!-- 使用 ELMessage 替代 -->
-    <!-- <el-dialog align-center v-model="resultVisible" title="响应结果" width="30%">
-      <span>{{ resultInfo }}</span>
+    <el-dialog align-center v-model="detailVisible" title="商品详情" width="30%">
+      <span>
+        <!-- 商品信息 -->
+        <el-form ref="ruleFormRef" v-model="detailData" label-width="120px" class="demo-ruleForm">
+          <el-form-item label="参考图片" prop="productName">
+            <img :src="detailData.photoUrl === null ? null : detailData.photoUrl + '?x=' + new Date().getTime()" alt="无参考图片" height="150" width="150" />
+          </el-form-item>
+          <el-form-item label="商品名称" prop="productName">
+            <el-input v-model="detailData.productName" disabled="disabled"></el-input>
+          </el-form-item>
+          <el-form-item label="商品价格" prop="productPrice">
+            <el-input v-model="detailData.productPrice" disabled="disabled"></el-input>
+          </el-form-item>
+          <el-form-item label="商品库存" prop="productCount">
+            <el-input v-model="detailData.productCount" disabled="disabled"></el-input>
+          </el-form-item>
+          <el-form-item label="商品简介" prop="productIntroduction">
+            <el-input v-model="detailData.productIntroduction" disabled="disabled"></el-input>
+          </el-form-item>
+        </el-form>
+      </span>
       <template #footer>
         <span class="dialog-footer">
-          <el-button type="primary" @click="resultVisible = false">确认</el-button>
+          <el-button type="primary" @click="detailVisible = false">确认</el-button>
         </span>
       </template>
-    </el-dialog> -->
+    </el-dialog>
   </ContentCard>
 </template>
 
@@ -96,7 +120,7 @@ const productList = ref();
 onMounted(() => {
   axios.get('/api/product/buyer').then(res => {
     productList.value = res.data.data;
-    console.log(productList.value);
+    // console.log(productList.value);
   });
 });
 
@@ -108,14 +132,39 @@ function searchByKeyword() {
   if (keywordSearch.value.keyword === '') {
     axios.get('/api/product/buyer').then(res => {
       productList.value = res.data.data;
-      console.log(productList.value);
+      // console.log(productList.value);
     });
   } else {
     axios.get('/api/product/buyer/search/' + keywordSearch.value.keyword).then(res => {
       productList.value = res.data.data;
-      console.log(productList.value);
+      // console.log(productList.value);
     });
   }
+}
+
+// 商品详情
+const detailData = ref();
+// 响应窗口是否弹出
+const detailVisible = ref(false);
+// 向后台请求详情数据
+function getDetail(p) {
+  axios
+    .get('/api/product/buyer/' + p.id, {
+      headers: {
+        Authorization: store.state.personalInfo.token,
+      },
+    })
+    .then(res => {
+      if (res.data.code === 200) {
+        detailData.value = res.data.data;
+        detailVisible.value = true;
+      } else {
+        ElMessage({
+          type: 'warning',
+          message: `${res.data.msg}`,
+        });
+      }
+    });
 }
 
 // 弹出框是否可见参数
@@ -125,10 +174,6 @@ const cartForm = ref({
   count: 1,
   productId: 0,
 });
-// 响应窗口是否弹出
-// const resultVisible = ref(false);
-// 响应窗口内容
-// const resultInfo = ref();
 
 // 表单验证规则
 const addCartRules = ref({
@@ -164,5 +209,8 @@ function addCartFunction() {
 <style scoped>
 #cartNumber {
   width: 60px;
+}
+.option-button {
+  margin-top: 15px;
 }
 </style>

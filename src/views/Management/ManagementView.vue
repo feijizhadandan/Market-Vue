@@ -2,19 +2,19 @@
   <ContentCard>
     <div id="option">
       <a class="record" href="http://localhost:9999/jmreport/view/762276609908244480" target="_blank">
-        <el-button color="#626aef" :dark="isDark" plain>用户浏览记录</el-button>
+        <el-button color="#626aef" plain>用户浏览记录</el-button>
       </a>
       <a class="record" href="http://localhost:9999/jmreport/view/762276277052473344" target="_blank">
-        <el-button color="#626aef" :dark="isDark" plain>用户购买记录</el-button>
+        <el-button color="#626aef" plain>用户购买记录</el-button>
       </a>
       <el-button id="add" type="primary" plain @click="addNewVisible = true">新增商品</el-button>
     </div>
     <el-table :data="productList" style="width: 95%; margin: auto">
       <el-table-column fixed prop="code" label="商品编号" width="100"></el-table-column>
-      <el-table-column fixed prop="productName" label="商品名称" width="200"></el-table-column>
-      <el-table-column fixed prop="productPrice" label="单价" width="200"></el-table-column>
-      <el-table-column fixed prop="isShow" label="用户是否可见" width="200"></el-table-column>
-      <el-table-column fixed prop="productIntroduction" label="商品简介" width="200"></el-table-column>
+      <el-table-column prop="productName" label="商品名称" width="200"></el-table-column>
+      <el-table-column prop="productPrice" label="单价" width="200"></el-table-column>
+      <el-table-column prop="isShow" label="用户是否可见" width="200"></el-table-column>
+      <el-table-column prop="productIntroduction" label="商品简介" width="200"></el-table-column>
       <el-table-column fixed="right" label="操作" width="300">
         <template #default="scope">
           <el-button
@@ -431,7 +431,6 @@ function getProductData() {
         router.push('/market');
       } else {
         productList.value = res.data.data;
-        console.log(productList.value);
       }
     });
 }

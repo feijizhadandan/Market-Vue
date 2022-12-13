@@ -17,7 +17,7 @@
           <el-form-item label="手机号码" prop="phone">
             <el-input placeholder="请输入手机号" v-model="registerInfo.phone"></el-input>
           </el-form-item>
-          <el-form-item label="邮箱" prop="email">
+          <el-form-item label="邮箱(发货所需邮箱)" prop="email">
             <el-input placeholder="请输入邮箱" v-model="registerInfo.email"></el-input>
           </el-form-item>
           <el-form-item label="性别" prop="sex">

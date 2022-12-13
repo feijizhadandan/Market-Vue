@@ -3,9 +3,9 @@
     <el-table :data="cartList" style="width: 85%; margin: auto" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="60"></el-table-column>
       <el-table-column fixed prop="productName" label="商品名称" width="200"></el-table-column>
-      <el-table-column fixed prop="productPrice" label="单价" width="200"></el-table-column>
-      <el-table-column fixed prop="count" label="数量" width="200"></el-table-column>
-      <el-table-column fixed prop="totalPrice" label="总价格" width="200"></el-table-column>
+      <el-table-column prop="productPrice" label="单价" width="200"></el-table-column>
+      <el-table-column prop="count" label="数量" width="200"></el-table-column>
+      <el-table-column prop="totalPrice" label="总价格" width="200"></el-table-column>
       <el-table-column fixed="right" label="操作" width="210">
         <template #default="scope">
           <el-button
@@ -87,7 +87,6 @@ const addCartRules = ref({
 // 选择框变动
 function handleSelectionChange(val) {
   chooseList.value = val;
-  console.log(chooseList);
 }
 
 // 每次进入购物车都获取一次购物车内容
@@ -100,7 +99,6 @@ onMounted(() => {
     })
     .then(res => {
       cartList.value = res.data.data;
-      console.log(cartList.value);
     });
 });
 

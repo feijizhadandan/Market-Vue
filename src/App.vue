@@ -1,6 +1,6 @@
 <template>
   <div id="background">
-    <img id="img" :src="imgSrc" alt="..." />
+    <img id="img" :src="imgSrc" />
   </div>
   <div id="content">
     <NavBar />
@@ -20,7 +20,8 @@ import router from './router';
 import store from './store';
 
 // 背景图片url
-const imgSrc = ref('http://47.106.122.140:19000/store/productphoto_1670865562418_background.png');
+// const imgSrc = ref('http://47.106.122.140:19000/store/productphoto_1670865562418_background.png');
+const imgSrc = ref('');
 
 // 刷新后用于验证用户登录状态
 onMounted(() => {
