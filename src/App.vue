@@ -20,8 +20,7 @@ import router from './router';
 import store from './store';
 
 // 背景图片url
-// const imgSrc = ref('http://47.106.122.140:19000/store/productphoto_1670865562418_background.png');
-const imgSrc = ref('');
+const imgSrc = ref('http://47.106.122.140:19000/store/productphoto_1671025864398_background2.png');
 
 // 刷新后用于验证用户登录状态
 onMounted(() => {
