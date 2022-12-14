@@ -93,7 +93,7 @@
             <el-input v-model="detailData.productCount" disabled="disabled"></el-input>
           </el-form-item>
           <el-form-item label="商品简介" prop="productIntroduction">
-            <el-input v-model="detailData.productIntroduction" disabled="disabled"></el-input>
+            <el-input type="textarea" v-model="detailData.productIntroduction" disabled="disabled"></el-input>
           </el-form-item>
         </el-form>
       </span>

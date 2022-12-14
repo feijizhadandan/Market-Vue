@@ -72,7 +72,7 @@
             <el-input v-model="newProductForm.productCount"></el-input>
           </el-form-item>
           <el-form-item label="商品简介" prop="productIntroduction">
-            <el-input v-model="newProductForm.productIntroduction"></el-input>
+            <el-input type="textarea" v-model="newProductForm.productIntroduction"></el-input>
           </el-form-item>
           <el-form-item label="是否展示给用户" prop="isShow">
             <el-switch v-model="newProductForm.isShow"></el-switch>
@@ -126,7 +126,7 @@
             <el-input v-model="productList[detailIndex].productCount" disabled="disabled"></el-input>
           </el-form-item>
           <el-form-item label="商品简介" prop="productIntroduction">
-            <el-input v-model="productList[detailIndex].productIntroduction" disabled="disabled"></el-input>
+            <el-input type="textarea" v-model="productList[detailIndex].productIntroduction" disabled="disabled"></el-input>
           </el-form-item>
           <el-form-item label="是否展示给用户" prop="isShow">
             <el-switch v-model="productList[detailIndex].isShow" disabled="disabled"></el-switch>
@@ -141,7 +141,7 @@
             <el-input v-model="productList[detailIndex].updateName" disabled="disabled"></el-input>
           </el-form-item>
           <el-form-item label="更新时间" prop="updateName">
-            <el-input v-model="productList[detailIndex].updateName" disabled="disabled"></el-input>
+            <el-input v-model="productList[detailIndex].updateTime" disabled="disabled"></el-input>
           </el-form-item>
         </el-form>
       </span>
@@ -176,7 +176,7 @@
             <el-input v-model="updateForm.productCount"></el-input>
           </el-form-item>
           <el-form-item label="商品简介" prop="productIntroduction">
-            <el-input v-model="updateForm.productIntroduction"></el-input>
+            <el-input type="textarea" v-model="updateForm.productIntroduction"></el-input>
           </el-form-item>
           <el-form-item label="是否展示给用户" prop="isShow">
             <el-switch v-model="updateForm.isShow"></el-switch>
