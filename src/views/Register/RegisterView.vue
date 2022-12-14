@@ -9,10 +9,10 @@
             <el-input placeholder="请输入用户名" v-model="registerInfo.username"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password">
-            <el-input placeholder="请输入密码" v-model="registerInfo.password"></el-input>
+            <el-input placeholder="请输入密码" type="password" v-model="registerInfo.password"></el-input>
           </el-form-item>
           <el-form-item label="重复密码" prop="repeatPassword">
-            <el-input placeholder="请重复输入密码" v-model="repeatPassword"></el-input>
+            <el-input placeholder="请重复输入密码" type="password" v-model="repeatPassword"></el-input>
           </el-form-item>
           <el-form-item label="手机号码" prop="phone">
             <el-input placeholder="请输入手机号" v-model="registerInfo.phone"></el-input>

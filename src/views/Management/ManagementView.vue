@@ -1,10 +1,10 @@
 <template>
   <ContentCard>
     <div id="option">
-      <a class="record" href="http://localhost:9999/jmreport/view/762276609908244480" target="_blank">
+      <a class="record" :href="store.state.browseRecordUrl" target="_blank">
         <el-button color="#626aef" plain>用户浏览记录</el-button>
       </a>
-      <a class="record" href="http://localhost:9999/jmreport/view/762276277052473344" target="_blank">
+      <a class="record" :href="store.state.buyRecordUrl" target="_blank">
         <el-button color="#626aef" plain>用户购买记录</el-button>
       </a>
       <el-button id="add" type="primary" plain @click="addNewVisible = true">新增商品</el-button>

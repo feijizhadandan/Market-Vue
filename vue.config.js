@@ -10,7 +10,7 @@ module.exports = defineConfig({
     //配置跨域
     proxy: {
         '/api': {
-            target: 'http://localhost:9999/',//这里后台的地址模拟的;应该填写你们真实的后台接口
+            target: 'http://47.106.122.140:9999/',//填写你们真实的后台接口
             ws: true,       
             changOrigin: true,//允许跨域
             pathRewrite: {
